@@ -1,14 +1,103 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+ <Layout Style="min-height: 100vh">
+            <Sider Theme="SiderTheme.Light" Width="210"
+                   Collapsible Collapsed=@collapsed NoTrigger OnCollapse="OnCollapse"
+                   Style="overflow: auto ;position:fixed;height: 100vh;z-index:99" CollapsedWidth="48">
+                   <!--Brand -->
+                <a href="/">
+                    <div style="height:64px;background:seagreen;  display: flex; justify-content: center; align-items: center; font-size:17px">
+                        <span class="logo-sm">
+                            <img src="images/AppLogo.png" style="-webkit-filter:invert(100%)" alt="" height="30">
+                        </span>
+                        @if (!collapsed)
+                        {
+                            <span class="logo-lg" style="flex: none;">
+                                <span style="color:white; padding-left:5px">Blazeam</span>
+                            </span>
+                        }
+                    </div>
+                </a>
+                <NavMenu />
+            </Sider>
 
-    <main>
-       
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+            <Layout Class="site-layout" Style="@styleMenu">
+                <Header Class="headerbar-layout-background" Style="@headerWidth">
+                    @if (collapsed)
+                    {
+                        <Icon Type="menu-unfold" Width="2.2em" Height="2.2em" Theme="outline" Class="trigger" OnClick="toggle" />
+                    }
+                    else
+                    {
+                        <Icon Type="menu-fold" Width="2.2em" Height="2.2em" Theme="outline" Class="trigger" OnClick="toggle" />
+                    }
+
+                    <div style="float:right;padding-right:20px">
+
+                        @*<LoginDisplay />*@
+                    </div>
+                </Header>
+
+                <Content Class="site-layout-background" Style="margin: 24px 16px; margin-top:88px;">
+                    <Row OnBreakpoint="HandleBreakpoint" />
+                    @Body
+                </Content>
+            </Layout>
+        </Layout>
+
+
+@code {
+
+    #region Collapse toggle
+    bool collapsed;
+
+    void toggle()
+    {
+        collapsed = !collapsed;
+
+        SetMenuWith();
+
+
+    }
+
+    void HandleBreakpoint(BreakpointType breakpoint)
+    {
+        if (breakpoint <= BreakpointType.Md)
+        {
+            collapsed = true;
+        }
+        else
+        {
+            collapsed = false;
+
+        }
+        SetMenuWith();
+    }
+    private void SetMenuWith()
+    {
+        if (collapsed == true)
+        {
+            styleMenu = "padding-left:48px";
+            headerWidth = "position: fixed; z-index: 1; padding:0;width:calc(100% - 48px);";
+        }
+        else
+        {
+            styleMenu = "padding-left:210px";
+            headerWidth = "position: fixed; z-index: 1; padding:0;width:calc(100% - 210px);";
+        }
+    }
+    void OnCollapse(bool isCollapsed)
+    {
+        //  Console.WriteLine($"Collapsed: {isCollapsed}");
+    }
+
+    #endregion
+
+    #region Layout Header menu Style
+    string styleMenu = "padding-left:210px";
+
+    string headerWidth = "position: fixed; z-index: 1; padding:0;width:calc(100% - 210px);";
+
+
+    #endregion
+}

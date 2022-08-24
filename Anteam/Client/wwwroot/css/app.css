@@ -1,6 +1,23 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
-/*for index html page blazor-error-ui class*/
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/*dismmiss and error ui cs */
+/*
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}*/
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
@@ -29,3 +46,27 @@
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+    /*Ant-design css*/
+
+.headerbar-layout-background {
+    background: #fff;
+}
+
+.site-layout .site-layout-background {
+    background: #fff;
+}
+
+.ant-menu {
+    font-size: 14px !important;
+}
+
+.ant-menu-inline-collapsed {
+    width: 48px !important;
+}
+
+.ant-layout-sider-has-trigger::-webkit-scrollbar {
+    width: 14px !important;
+    height: 14px !important;
+}

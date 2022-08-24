@@ -1,35 +1,24 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Anteam</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+﻿<Menu Theme="MenuTheme.Light" Accordion Mode="MenuMode.Inline"
+      OnMenuItemClicked=handleClick
+      DefaultSelectedKeys=@(new[]{"home"})>
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-      
-    </nav>
-</div>
+    <MenuItem Key="home" RouterLink="" RouterMatch="@NavLinkMatch.All">
+        <Icon Type="home" Theme="outline" Style="font-size:20px" />
+        <span>Home</span>
+    </MenuItem>
+    <MenuItem Key="counter" RouterLink="counter">
+        <Icon Type="area-chart" Theme="outline" Style="font-size:20px" />
+        <span>Counter</span>
+    </MenuItem>
+</Menu>
 
 @code {
-    private bool collapseNavMenu = true;
+    string current = "home";
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-    private void ToggleNavMenu()
+    void handleClick(MenuItem e)
     {
-        collapseNavMenu = !collapseNavMenu;
+        current = e.Key;
     }
+
 }
