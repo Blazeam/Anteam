@@ -11,8 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Client\Anteam.Client.csproj" />
-    <ProjectReference Include="..\Shared\Anteam.Shared.csproj" />
+    <ProjectReference Include="..\..\Client\Anteam.Client\Anteam.Client.csproj" />
   </ItemGroup>
 
 
